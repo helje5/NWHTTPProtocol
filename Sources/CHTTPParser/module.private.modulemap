@@ -1,0 +1,13 @@
+//
+// Copyright (C) 2020 ZeeZide GmbH, All Rights Reserved
+// Created by Helge Hess on 23/01/2017.
+//
+
+// System Module map for CHTTPParser
+
+module CHTTPParser [system] {
+  
+  header "include/http_parser.h"
+  
+  export *
+}

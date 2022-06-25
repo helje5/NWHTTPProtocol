@@ -2,7 +2,7 @@
 //  HTTPServer.swift
 //  NWHTTPServer
 //
-//  Copyright © 2020 ZeeZide GmbH. All rights reserved.
+//  Copyright © 2020-2022 ZeeZide GmbH. All rights reserved.
 //
 
 import class Dispatch.DispatchQueue
@@ -201,7 +201,7 @@ public final class HTTPServer {
   {
     switch state {
       case .setup, .preparing, .waiting: break
-      case .ready     : self.readNextMessage(from: connection)
+      case .ready     : readNextMessage(from: connection)
       case .cancelled : unregister(connection)
         
       case .failed(let error):
@@ -240,10 +240,8 @@ public final class HTTPServer {
       assert(isComplete || error != nil) // right?
       
       guard let state = self.clients[oid] else { // already cancelled.
-        if connection.state != .cancelled {
-          assertionFailure("unexpected missing client state")
-          connection.cancel()
-        }
+        // can happen when the server is suspended (that cancels all the
+        // connections and drops all states synchronously).
         return
       }
       

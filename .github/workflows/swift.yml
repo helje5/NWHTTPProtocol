@@ -4,7 +4,7 @@ on:
   push:
   pull_request:
   schedule:
-    - cron: "42 10 * * 1"
+    - cron: "10 13 * * 1"
 
 jobs:
   macOS-Swift-Package:
@@ -36,7 +36,7 @@ jobs:
       - name: Show destinations
         run: xcodebuild -showdestinations -scheme NWHTTPServer
       - name: Build
-        run: set -o pipefail; xcodebuild -scheme NWHTTPServer -destination "platform=iOS Simulator,OS=13.5,name=iPhone 11 Pro" build | xcpretty --color
+        run: set -o pipefail; xcodebuild -scheme NWHTTPServer -destination "platform=iOS Simulator,OS=15.2,name=iPhone 13 Pro" build | xcpretty --color
   NeXTstep-xcproject:
     runs-on: macos-latest
     steps:

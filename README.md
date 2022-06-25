@@ -9,6 +9,9 @@ An HTTP protocol parser (aka
 for the Apple 
 [Network](https://developer.apple.com/documentation/network).framework.
 
+How it works is described in the ARI blog entry:
+[Intro to Network.framework Servers](https://www.alwaysrightinstitute.com/network-framework/).
+
 Network.framework requires iOS 13+ / macOS 10.15+.
 
 This is intentionally kept very simple and basic. E.g. it does not define

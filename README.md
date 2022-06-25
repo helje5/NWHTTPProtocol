@@ -9,7 +9,7 @@ An HTTP protocol parser (aka
 for the Apple 
 [Network](https://developer.apple.com/documentation/network).framework.
 
-How it works is described in the ARI blog entry:
+How it works is described in my blog entry:
 [Intro to Network.framework Servers](https://www.alwaysrightinstitute.com/network-framework/).
 
 Network.framework requires iOS 13+ / macOS 10.15+.
@@ -19,8 +19,9 @@ Swift types for HTTP requests and the like, but puts the status/request/URI in p
 Message metadata fields.
 
 The protocol is just wrapping the (embedded) 
-[http_parser.c/h](https://github.com/nodejs/http-parser/)
+[`http_parser.c/h`](https://github.com/nodejs/http-parser/)
 developed as part of the Node.js project.
+
 
 ##  NWHTTPServer
 
@@ -36,12 +37,21 @@ let server = HTTPServer { request, response in
 server.run()
 ```
 
+
+## Production
+
+Note that for production use I'd suggest to not use a protocol framer for HTTP.
+Instead hookup `http_parser.c` to plain Network.framework (as shown for echo
+in the blog article).
+At least that's what I do in production apps.
+NW protocol framing isn't really required for http_parser.c, 
+because that already does all the framing necessary and can be fed
+asynchronously).
+
+
 ### Who
 
 **NWHTTPProtocol** is brought to you by
-the
-[Always Right Institute](http://www.alwaysrightinstitute.com)
-and
 [ZeeZide](http://zeezide.de).
 We like 
 [feedback](https://twitter.com/ar_institute), 
